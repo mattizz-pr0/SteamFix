@@ -1,7 +1,7 @@
 {
   "name": "steamfix-manager",
   "productName": "SteamFix Manager",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "SteamFix Manager — gestione OnlineFix, giochi e SteamTools",
   "main": "electron/main.js",
   "author": {

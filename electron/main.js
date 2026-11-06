@@ -15,6 +15,14 @@ const steam = require('./ipc/steam');
 const STEAM_STPLUGIN = 'C:\\Program Files (x86)\\Steam\\config\\stplug-in';
 const STEAM_DEPOTCACHE = 'C:\\Program Files (x86)\\Steam\\config\\depotcache';
 
+const L = (it, en) => (store.get('lang') === 'en' ? en : it);
+
+// Sicurezza: un nome file è accettato solo se contiene esclusivamente
+// lettere, numeri, punto, underscore e trattino. Serve a impedire che un
+// nome proveniente da uno ZIP possa iniettare comandi PowerShell.
+const SAFE_FILE_NAME = /^[A-Za-z0-9][A-Za-z0-9._-]*$/;
+const SAFE_APP_ID = /^\d+$/;
+
 function createWindow() {
   const win = new BrowserWindow({
     width: 1100,
@@ -29,7 +37,7 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
       nodeIntegration: false,
-      sandbox: false
+      sandbox: true
     }
   });
   win.setMenuBarVisibility(false);
@@ -79,7 +87,7 @@ function registerIpc() {
   ipcMain.handle('dialog:saveFile', async (_e, defaultName) => {
     const win = BrowserWindow.getFocusedWindow();
     const res = await dialog.showSaveDialog(win, {
-      title: 'Salva file',
+      title: L('Salva file', 'Save file'),
       defaultPath: defaultName || 'download.zip',
       filters: [{ name: 'Zip', extensions: ['zip'] }]
     });
@@ -117,18 +125,22 @@ function registerIpc() {
   
     ipcMain.handle('dialog:openExternal', async (_e, url) => {
     const { shell } = require('electron');
-    await shell.openExternal(url);
+    // Consenti solo link http/https
+    let parsed;
+    try { parsed = new URL(String(url)); } catch { return false; }
+    if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') return false;
+    await shell.openExternal(parsed.toString());
     return true;
   });
 
     ipcMain.handle('dialog:openFile', async (_e) => {
     const win = BrowserWindow.getFocusedWindow();
     const res = await dialog.showOpenDialog(win, {
-      title: 'Seleziona file OnlineFix',
+      title: L('Seleziona file OnlineFix', 'Select an OnlineFix file'),
       properties: ['openFile'],
       filters: [
-        { name: 'Archivi', extensions: ['zip', 'rar', '7z', 'tar', 'gz'] },
-        { name: 'Tutti i file', extensions: ['*'] }
+        { name: L('Archivi', 'Archives'), extensions: ['zip', 'rar', '7z', 'tar', 'gz'] },
+        { name: L('Tutti i file', 'All files'), extensions: ['*'] }
       ]
     });
     return res.canceled || !res.filePaths.length ? null : res.filePaths[0];
@@ -157,6 +169,7 @@ function registerIpc() {
 
   // Installa un gioco direttamente in SteamTools (con UAC)
   ipcMain.handle('steam:installGame', async (_e, appId) => {
+    if (!SAFE_APP_ID.test(String(appId))) throw new Error(L('app_id non valido.', 'Invalid app_id.'));
     // 1) scarica lo zip da GitHub
     const workerUrl = store.get('workerUrl') || 'https://onlinefix-proxy.reveng3r.workers.dev';
     const url = `${workerUrl}/api/github/download?branch=games&path=${encodeURIComponent(appId + '.zip')}`;
@@ -176,9 +189,20 @@ function registerIpc() {
     zip.extractAllTo(tmpExtract, true);
 
     // 4) prepara la lista di cosa copiare dove
+    //    Solo nomi file sicuri: un nome con virgolette o altri caratteri
+    //    speciali potrebbe iniettare comandi nello script PowerShell elevato.
     const files = fs.readdirSync(tmpExtract);
-    const luaFiles = files.filter(f => f.toLowerCase().endsWith('.lua'));
-    const manifestFiles = files.filter(f => f.toLowerCase().endsWith('.manifest'));
+    const archiveFiles = files.filter(f => /\.(lua|manifest)$/i.test(f));
+    const unsafe = archiveFiles.filter(f => !SAFE_FILE_NAME.test(f));
+    if (unsafe.length) {
+      try { fs.rmSync(tmpExtract, { recursive: true, force: true }); } catch {}
+      throw new Error(L(
+        `Archivio non valido: nome file non consentito (${unsafe[0]}).`,
+        `Invalid archive: file name not allowed (${unsafe[0]}).`
+      ));
+    }
+    const luaFiles = files.filter(f => f.toLowerCase().endsWith('.lua') && SAFE_FILE_NAME.test(f));
+    const manifestFiles = files.filter(f => f.toLowerCase().endsWith('.manifest') && SAFE_FILE_NAME.test(f));
 
     // 5) script PowerShell per copiare i file (con UAC)
     const psLines = [];
@@ -218,6 +242,7 @@ function registerIpc() {
     // Installa un gioco da uno zip scaricato dal worker
   // (stessa logica di installGame ma senza richiedere il file già in locale)
   ipcMain.handle('steam:installFromWorker', async (_e, appId) => {
+    if (!SAFE_APP_ID.test(String(appId))) throw new Error(L('app_id non valido.', 'Invalid app_id.'));
     const fs = require('fs');
     const os = require('os');
     const path = require('path');
@@ -245,9 +270,19 @@ function registerIpc() {
     zip.extractAllTo(tmpExtract, true);
 
     // 4) prepara lista file da copiare
+    //    Solo nomi file sicuri (vedi nota sopra).
     const files = fs.readdirSync(tmpExtract);
-    const luaFiles = files.filter(f => f.toLowerCase().endsWith('.lua'));
-    const manifestFiles = files.filter(f => f.toLowerCase().endsWith('.manifest'));
+    const archiveFiles = files.filter(f => /\.(lua|manifest)$/i.test(f));
+    const unsafe = archiveFiles.filter(f => !SAFE_FILE_NAME.test(f));
+    if (unsafe.length) {
+      try { fs.rmSync(tmpExtract, { recursive: true, force: true }); } catch {}
+      throw new Error(L(
+        `Archivio non valido: nome file non consentito (${unsafe[0]}).`,
+        `Invalid archive: file name not allowed (${unsafe[0]}).`
+      ));
+    }
+    const luaFiles = files.filter(f => f.toLowerCase().endsWith('.lua') && SAFE_FILE_NAME.test(f));
+    const manifestFiles = files.filter(f => f.toLowerCase().endsWith('.manifest') && SAFE_FILE_NAME.test(f));
 
     // 5) script PowerShell per copiare (con UAC)
     const psLines = [];

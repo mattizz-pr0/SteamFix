@@ -414,6 +414,18 @@ main.entering{ opacity: 0; transform: translateY(-6px); }
 .settings-section h3{ font-size: 14.5px; font-weight: 700; margin-bottom: 4px; }
 .settings-section .desc{ font-size: 12.5px; color: var(--text-dim); margin-bottom: 16px; }
 
+/* ---------- Selettore lingua ---------- */
+.lang-switch{ display: inline-flex; gap: 6px; padding: 4px; background: var(--bg-surface); border: 1px solid var(--border-soft); border-radius: var(--radius-pill); }
+.lang-btn{
+  background: transparent; border: none; cursor: pointer;
+  padding: 7px 16px; border-radius: var(--radius-pill);
+  font-family: inherit; font-size: 12.5px; font-weight: 600;
+  color: var(--text-dim); transition: background .15s, color .15s;
+}
+.lang-btn:hover{ color: var(--text); background: var(--bg-elevated); }
+.lang-btn.active{ background: var(--accent); color: #fff; }
+.lang-btn.active:hover{ background: var(--accent); color: #fff; }
+
 .swatch-row{ display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .swatch{
   width: 30px; height: 30px; border-radius: 50%;

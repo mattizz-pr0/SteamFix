@@ -12,6 +12,8 @@
 
 **SteamFix Manager** è un'applicazione desktop Windows che semplifica la gestione di giochi e fix per SteamTools. Cerca, scarica, aggiorna e installa automaticamente i giochi e gli OnlineFix dal database del progetto.
 
+Realizzata con il **vibe coding**: un flusso di lavoro assistito dall'IA, in cui le funzionalità vengono descritte in linguaggio naturale, implementate e revisionate passo dopo passo.
+
 ## ✨ Funzionalità
 
 ### 📚 Libreria
@@ -44,6 +46,10 @@
 - L'app controlla automaticamente se ci sono nuove versioni
 - Ti avvisa quando c'è un aggiornamento disponibile
 - Si aggiorna da sola, senza dover riscaricare nulla
+
+### 🌍 Lingua
+- Interfaccia in italiano e inglese
+- Cambia lingua quando vuoi da **Impostazioni → 🌍 Lingua**
 
 ## 🚀 Come si usa
 
@@ -119,7 +125,7 @@ Per problemi, richieste di token, o segnalazioni:
 
 ---
 
-**Versione attuale:** 1.0.4
+**Versione attuale:** 1.0.5
 **Ultimo aggiornamento:** Novembre 2026
 
 **Changelog:** [CHANGELOG.md](CHANGELOG.md)

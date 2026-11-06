@@ -3,6 +3,7 @@
 // ============================================================
 
 (function () {
+  const L = (it, en) => window.i18n.L(it, en);
   let quota = null;
   let lastFetch = 0;
   const REFRESH_MS = 30 * 1000; // refresh ogni 30 secondi
@@ -34,7 +35,7 @@
       transition: all .2s;
       user-select: none;
     `;
-    el.title = "Clicca per aggiornare · La quota si azzera ogni giorno";
+    el.title = L("Clicca per aggiornare · La quota si azzera ogni giorno","Click to refresh · The quota resets every day");
     el.innerHTML = `
       <span style="font-size:13px;">📊</span>
       <span id="quota-text">…</span>
@@ -67,14 +68,14 @@
       const key = await window.api.hubcapKey.get();
       if (!key) {
         quota = null;
-        setText('⚠ Nessuna key', 'var(--text-dim)');
+        setText(L('⚠ Nessuna key','⚠ No key'), 'var(--text-dim)');
         return;
       }
 
       const r = await window.api.hubcap.userStats();
       if (!r || r.error) {
         quota = null;
-        setText('⚠ Quota non disponibile', 'var(--signal)');
+        setText(L('⚠ Quota non disponibile','⚠ Quota unavailable'), 'var(--signal)');
         return;
       }
 
@@ -83,7 +84,7 @@
       render();
     } catch (e) {
       quota = null;
-      setText('⚠ Errore quota', '#ff7a7a');
+      setText(L('⚠ Errore quota','⚠ Quota error'), '#ff7a7a');
     }
   }
 
@@ -115,16 +116,16 @@
       if (msToExp > 0) {
         const days = Math.floor(msToExp / 86400000);
         const hours = Math.floor((msToExp % 86400000) / 3600000);
-        if (days > 0) expiryText = ` · key: ${days}g`;
+        if (days > 0) expiryText = ` · key: ${days}${L('g','d')}`;
         else if (hours > 0) expiryText = ` · key: ${hours}h`;
         else expiryText = ` · key: <1h`;
       } else {
-        expiryText = ' · key SCADUTA';
+        expiryText = L(' · key SCADUTA',' · key EXPIRED');
         color = '#ff7a7a';
       }
     }
 
-    setText(`${remaining}/${limit} rimaste · reset ${h}h ${m}m${expiryText}`, color);
+    setText(`${remaining}/${limit} ${L('rimaste','left')} · reset ${h}h ${m}m${expiryText}`, color);
   }
 
   // Init: crea il widget quando la pagina è pronta

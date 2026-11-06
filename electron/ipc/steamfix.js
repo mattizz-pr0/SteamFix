@@ -1,4 +1,7 @@
 const { spawn } = require('child_process');
+const store = require('./store');
+
+const L = (it, en) => (store.get('lang') === 'en' ? en : it);
 
 /**
  * Esegue il comando "irm https://ps.lua.tools/install-ost.ps1 | iex" con
@@ -26,7 +29,7 @@ function run() {
     };
 
     const timer = setTimeout(() => {
-      finish({ ok: false, error: 'Timeout: il fix sta impiegando più di 5 minuti. Probabilmente UAC è stato annullato o il download è bloccato.' });
+      finish({ ok: false, error: L('Timeout: il fix sta impiegando più di 5 minuti. Probabilmente UAC è stato annullato o il download è bloccato.', 'Timeout: the fix is taking more than 5 minutes. UAC was probably cancelled or the download is blocked.') });
     }, TIMEOUT_MS);
 
     // Eseguo PowerShell che a sua volta lancia un nuovo PowerShell elevato.
@@ -56,7 +59,7 @@ function run() {
       child = spawn('powershell.exe', outerCmd, { windowsHide: true });
     } catch (e) {
       clearTimeout(timer);
-      return finish({ ok: false, error: 'Impossibile avviare PowerShell: ' + e.message });
+      return finish({ ok: false, error: L('Impossibile avviare PowerShell: ', 'Unable to start PowerShell: ') + e.message });
     }
 
     let stderr = '';
@@ -65,7 +68,7 @@ function run() {
 
     child.on('error', (e) => {
       clearTimeout(timer);
-      finish({ ok: false, error: 'Errore spawn: ' + e.message });
+      finish({ ok: false, error: L('Errore spawn: ', 'Spawn error: ') + e.message });
     });
 
     child.on('close', (code) => {
@@ -76,7 +79,7 @@ function run() {
       if (code === 0) {
         finish({ ok: true });
       } else {
-        finish({ ok: false, error: stderr || `PowerShell exit code ${code} (UAC annullato?)` });
+        finish({ ok: false, error: stderr || L(`PowerShell exit code ${code} (UAC annullato?)`, `PowerShell exit code ${code} (UAC cancelled?)`) });
       }
     });
   });

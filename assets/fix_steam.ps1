@@ -1,1 +1,0 @@
-Invoke-RestMethod "https://ps.lua.tools/install-ost.ps1" | Invoke-Expression

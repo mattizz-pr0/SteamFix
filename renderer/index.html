@@ -29,7 +29,7 @@
           <rect x="3" y="3" width="7" height="7" rx="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.6"/>
           <rect x="3" y="14" width="7" height="7" rx="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.6"/>
         </svg>
-        <span>Libreria</span>
+        <span data-it="Libreria" data-en="Library">Libreria</span>
       </button>
 
       <button data-view="download" class="nav-btn" type="button">
@@ -78,14 +78,14 @@
         <line x1="4" y1="12" x2="20" y2="12"/><circle cx="16" cy="12" r="2" fill="currentColor" stroke="none"/>
         <line x1="4" y1="18" x2="20" y2="18"/><circle cx="10" cy="18" r="2" fill="currentColor" stroke="none"/>
       </svg>
-      <span>Impostazioni</span>
+      <span data-it="Impostazioni" data-en="Settings">Impostazioni</span>
     </button>
 
     <div class="version" id="version">v1.0.0</div>
 
     <div class="credits">
       <div class="credit-line">by <span class="credit-name">mattizz-pr0</span></div>
-      <button class="credit-license" id="license-btn" type="button" title="Visualizza la licenza MIT">MIT License</button>
+      <button class="credit-license" id="license-btn" type="button" data-it-title="Visualizza la licenza MIT" data-en-title="View the MIT license" title="Visualizza la licenza MIT">MIT License</button>
     </div>
   </aside>
 
@@ -93,6 +93,7 @@
 
   <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
 
+  <script src="i18n.js"></script>
   <script src="quota.js"></script>
   <script src="app.js"></script>
 </body>

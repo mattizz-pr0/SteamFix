@@ -12,6 +12,7 @@ const store = new Store({
     hubcapDailyUsed: 0,
     hubcapDailyDate: '',
     theme: 'dark',
+    lang: 'it',
     workerUrl: 'https://onlinefix-proxy.reveng3r.workers.dev',
     adminToken: ''
   }
