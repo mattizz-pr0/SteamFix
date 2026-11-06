@@ -106,10 +106,9 @@ Sì, è voluto. Le impostazioni (API key, token) sono salvate in una cartella se
 
 ## 📄 Licenza
 
-**Proprietary License** — Tutti i diritti riservati.
-Copyright (c) 2026 mattizz-pr0.
+**MIT License** — Copyright (c) 2026 mattizz-pr0.
 
-È severamente vietata la redistribuzione, la modifica o la vendita di questa applicazione senza esplicita autorizzazione scritta.
+Il software è fornito così com'è, senza garanzie di alcun tipo. È consentito usare, copiare, modificare, distribuire, sublicenziare e vendere il software, a condizione di includere il copyright e il testo della licenza in tutte le copie o parti sostanziali. Vedi il file [LICENSE](LICENSE).
 
 ---
 

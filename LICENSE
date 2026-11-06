@@ -1,53 +1,21 @@
-SteamFix Manager - Licenza d'uso
-Copyright (c) 2026 mattizz-pr0. Tutti i diritti riservati.
+MIT License
 
-1. CONCESSIONE D'USO
-   Il presente software e' concesso in uso esclusivamente in forma
-   binaria, gratuitamente e "cosi' com'e'", unicamente per scopi
-   personali e non commerciali. L'utente e' autorizzato a installare
-   ed eseguire il software sul proprio dispositivo personale.
+Copyright (c) 2026 mattizz-pr0
 
-2. RESTRIZIONI
-   E' severamente vietato, senza esplicita autorizzazione scritta
-   del titolare del copyright:
-   a) Redistribuire, copiare, pubblicare, vendere, noleggiare o
-      sublicenziare il software, in tutto o in parte, con qualsiasi
-      mezzo (compresa la distribuzione tramite siti web, forum,
-      gruppi Telegram/Discord, o altri canali);
-   b) Modificare, decompilare, disassemblare, effettuare reverse
-      engineering o creare opere derivate dal software;
-   c) Rimuovere, alterare o nascondere avvisi di copyright,
-      marchi, o altre indicazioni di proprieta' presenti nel
-      software;
-   d) Utilizzare il software per scopi illegali o che violino
-      termini di servizio di terze parti.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-3. NESSUNA GARANZIA
-   IL SOFTWARE E' FORNITO "COSI' COM'E'", SENZA GARANZIE DI ALCUN
-   TIPO, ESPLICITE O IMPLICITE, INCLUSE, A TITOLO ESEMPLIFICATIVO,
-   LE GARANZIE DI COMMERCIABILITA', IDONEITA' PER UNO SCOPO
-   PARTICOLARE E NON VIOLAZIONE. IN NESSUN CASO IL TITOLARE DEL
-   COPYRIGHT SARA' RESPONSABILE PER QUALSIASI RECLAMO, DANNO O
-   ALTRA RESPONSABILITA', SIA IN UN'AZIONE DI CONTRATTO, TORTO O
-   ALTRO, DERIVANTE DA, FUORI O IN CONNESSIONE CON IL SOFTWARE
-   O L'USO O ALTRE OPERAZIONI NEL SOFTWARE.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-4. RESPONSABILITA' DELL'UTENTE
-   L'utente e' l'unico responsabile dell'utilizzo del software e
-   delle conseguenze derivanti dal suo utilizzo. Il titolare del
-   copyright non e' responsabile per eventuali violazioni di
-   termini di servizio, perdite di dati, danni hardware/software,
-   o conseguenze legali derivanti dall'uso del software.
-
-5. REVOCA
-   La presente licenza e' efficace fino a revoca. I diritti
-   concessi si intenderanno automaticamente revocati in caso di
-   violazione di una qualsiasi delle clausole sopra indicate.
-
-6. LEGGE APPLICABILE
-   La presente licenza e' regolata dalla legge italiana. Per
-   qualsiasi controversia sara' competente il Foro del domicilio
-   del titolare del copyright.
-
-Per richieste di licenza, autorizzazioni o informazioni:
-contattare il titolare del copyright.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
