@@ -1645,6 +1645,110 @@ function moveIndicator(btn) {
     });
   }
 
+  // ============================================================
+  //  MODALE LICENZA (MIT)
+  // ============================================================
+  const MIT_LICENSE_TEXT = `MIT License
+
+Copyright (c) 2026 mattizz-pr0
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.`;
+
+  function showLicense() {
+    const overlay = document.createElement("div");
+    overlay.style.cssText = `
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(11,13,18,.72);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      animation: of-fade-in .18s ease-out;
+    `;
+
+    const modal = document.createElement("div");
+    modal.style.cssText = `
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px 26px 20px;
+      max-width: 560px; width: calc(100% - 48px);
+      max-height: 80vh; display: flex; flex-direction: column;
+      box-shadow: 0 24px 60px rgba(0,0,0,.55);
+      animation: of-slide-up .22s cubic-bezier(.16,1,.3,1);
+      color: var(--text);
+    `;
+
+    const titleEl = document.createElement("h3");
+    titleEl.textContent = "MIT License";
+    titleEl.style.cssText = "font-size:16px;font-weight:700;margin-bottom:4px;color:var(--text);";
+
+    const subEl = document.createElement("div");
+    subEl.textContent = "Copyright (c) 2026 mattizz-pr0";
+    subEl.style.cssText = "font-size:11.5px;color:var(--text-faint);font-family:var(--font-mono);margin-bottom:14px;";
+
+    const pre = document.createElement("pre");
+    pre.textContent = MIT_LICENSE_TEXT;
+    pre.style.cssText = `
+      flex: 1; overflow: auto; margin: 0 0 18px;
+      font-family: var(--font-mono); font-size: 11.5px; line-height: 1.55;
+      color: var(--text-dim); white-space: pre-wrap;
+      background: var(--bg-surface); border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md); padding: 14px 16px;
+    `;
+
+    const actions = document.createElement("div");
+    actions.style.cssText = "display:flex;justify-content:flex-end;gap:8px;";
+
+    const btnClose = document.createElement("button");
+    btnClose.textContent = "Chiudi";
+    btnClose.style.cssText = `
+      background: var(--accent); color: #fff;
+      border: none; padding: 9px 18px;
+      border-radius: var(--radius-pill); font-size: 13px; font-weight: 600;
+      cursor: pointer; font-family: inherit;
+    `;
+
+    const close = () => {
+      overlay.style.animation = "of-fade-out .15s ease-in forwards";
+      modal.style.animation = "of-slide-down .15s ease-in forwards";
+      document.removeEventListener("keydown", onKey);
+      setTimeout(() => overlay.remove(), 150);
+    };
+    const onKey = (e) => { if (e.key === "Escape") close(); };
+
+    btnClose.addEventListener("click", close);
+    overlay.addEventListener("click", (e) => { if (e.target === overlay) close(); });
+    document.addEventListener("keydown", onKey);
+
+    actions.appendChild(btnClose);
+    modal.appendChild(titleEl);
+    modal.appendChild(subEl);
+    modal.appendChild(pre);
+    modal.appendChild(actions);
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+    setTimeout(() => btnClose.focus(), 50);
+  }
+
+  const licenseBtn = document.getElementById("license-btn");
+  if (licenseBtn) licenseBtn.addEventListener("click", showLicense);
+
   // Ogni 60 secondi ricontrolla se la key HubcapDB è ancora valida
 setInterval(async () => {
   const cfg = await window.api.store.all();

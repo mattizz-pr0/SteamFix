@@ -106,6 +106,10 @@ Sì, è voluto. Le impostazioni (API key, token) sono salvate in una cartella se
 - Le chiamate a HubcapDB sono fatte **direttamente** dal tuo PC, con **la tua** API key
 - Il worker Cloudflare usato per gli aggiornamenti **non salva** la tua key
 
+### 🛠 Realizzata con il vibe coding
+
+Questo progetto è stato sviluppato con il **vibe coding**: uno sviluppo guidato dall'AI, in cui le idee diventano codice iterando rapidamente tra prompt, test e correzioni.
+
 ### 📄 Licenza
 
 **MIT License** — Copyright (c) 2026 mattizz-pr0.
@@ -117,8 +121,8 @@ Il software è fornito così com'è, senza garanzie di alcun tipo. È consentito
 Per problemi, richieste di token, o segnalazioni:
 **contatta l'amministratore** (mattizz-pr0).
 
-**Versione attuale:** 1.0.3
-**Ultimo aggiornamento:** Ottobre 2026
+**Versione attuale:** 1.0.4
+**Ultimo aggiornamento:** Novembre 2026
 
 ---
 
@@ -216,6 +220,10 @@ Yes, that's intended. Settings (API key, token) are stored in a separate folder 
 - HubcapDB calls are made **directly** from your PC, with **your** API key
 - The Cloudflare worker used for updates **does not store** your key
 
+### 🛠 Built with vibe coding
+
+This project was built with **vibe coding**: an AI-assisted development approach where ideas turn into working code through fast iteration across prompts, tests and fixes.
+
 ### 📄 License
 
 **MIT License** — Copyright (c) 2026 mattizz-pr0.
@@ -227,5 +235,5 @@ The software is provided "as is", without warranty of any kind. You are free to 
 For issues, token requests or bug reports:
 **contact the administrator** (mattizz-pr0).
 
-**Current version:** 1.0.3
-**Last updated:** October 2026
+**Current version:** 1.0.4
+**Last updated:** November 2026
