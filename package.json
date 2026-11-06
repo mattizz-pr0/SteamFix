@@ -1,0 +1,63 @@
+{
+  "name": "steamfix-manager",
+  "productName": "SteamFix Manager",
+  "version": "1.0.3",
+  "description": "SteamFix Manager — gestione OnlineFix, giochi e SteamTools",
+  "main": "electron/main.js",
+  "author": {
+    "name": "mattizz-pr0"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win msi nsis"
+  },
+  "devDependencies": {
+    "electron": "^31.7.7",
+    "electron-builder": "^24.13.3"
+  },
+  "dependencies": {
+    "electron-store": "^8.2.0",
+    "adm-zip": "^0.5.14"
+  },
+  "build": {
+    "appId": "com.mattizzpr0.steamfixmanager",
+    "productName": "SteamFix Manager",
+    "copyright": "Copyright © 2026 mattizz-pr0",
+    "directories": {
+      "output": "dist",
+      "buildResources": "assets"
+    },
+    "files": [
+      "electron/**/*",
+      "renderer/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        { "target": "msi", "arch": ["x64"] },
+        { "target": "nsis", "arch": ["x64"] }
+      ],
+      "icon": "assets/icon.ico",
+      "publisherName": "mattizz-pr0"
+    },
+    "msi": {
+      "oneClick": false,
+      "perMachine": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "SteamFix Manager"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "SteamFix Manager",
+      "license": "LICENSE",
+      "unicode": true
+    }
+  }
+}

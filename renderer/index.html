@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' https: data:;" />
+  <title>SteamFix Manager</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="bg-photo" id="bg-photo" aria-hidden="true"></div>
+  <div class="bg-scrim" aria-hidden="true"></div>
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark">SF</span>
+      <div class="brand-text">
+        <h1>SteamFix</h1>
+        <div class="sub">Manager</div>
+      </div>
+    </div>
+
+    <nav id="nav">
+      <div class="nav-indicator" id="nav-indicator"></div>
+
+      <button data-view="library" class="nav-btn active" type="button">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7" rx="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.6"/>
+          <rect x="3" y="14" width="7" height="7" rx="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.6"/>
+        </svg>
+        <span>Libreria</span>
+      </button>
+
+      <button data-view="download" class="nav-btn" type="button">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3v11"/><path d="M7.5 10.5 12 15l4.5-4.5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>
+        </svg>
+        <span>Download</span>
+      </button>
+
+      <button data-view="onlinefix" class="nav-btn" type="button">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 7.5 12 3 3 7.5l9 4.5 9-4.5Z"/><path d="M3 7.5v9l9 4.5 9-4.5v-9"/><path d="M12 12v9"/>
+        </svg>
+        <span>OnlineFix</span>
+      </button>
+
+      <button data-view="upload" class="nav-btn" type="button">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 15V4"/><path d="M7.5 8.5 12 4l4.5 4.5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>
+        </svg>
+        <span>Upload</span>
+      </button>
+
+
+    </nav>
+
+    <button id="fix-steam" class="fix-steam" type="button">
+      <span class="fix-ring">
+        <svg class="ring-svg" viewBox="0 0 36 36">
+          <circle class="ring-bg" cx="18" cy="18" r="15"/>
+          <circle class="ring-fg" cx="18" cy="18" r="15"/>
+        </svg>
+        <svg class="fix-icon icon-wrench" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3 17.8V21h3.2l6.3-6.3a4 4 0 0 0 5.2-5.4l-2.7 2.7-2-2 2.7-2.7Z"/>
+        </svg>
+        <svg class="fix-icon icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 12.5 9.5 18 20 6.5"/>
+        </svg>
+      </span>
+      <span class="fix-label">Fix Steam</span>
+    </button>
+
+    <button data-view="settings" class="nav-btn settings-below" type="button">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="4" y1="6" x2="20" y2="6"/><circle cx="9" cy="6" r="2" fill="currentColor" stroke="none"/>
+        <line x1="4" y1="12" x2="20" y2="12"/><circle cx="16" cy="12" r="2" fill="currentColor" stroke="none"/>
+        <line x1="4" y1="18" x2="20" y2="18"/><circle cx="10" cy="18" r="2" fill="currentColor" stroke="none"/>
+      </svg>
+      <span>Impostazioni</span>
+    </button>
+
+    <div class="version" id="version">v1.0.0</div>
+
+    <div class="credits">
+      <div class="credit-line">by <span class="credit-name">mattizz-pr0</span></div>
+      <div class="credit-license">Proprietary License</div>
+    </div>
+  </aside>
+
+  <main id="view"></main>
+
+  <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
+
+  <script src="quota.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

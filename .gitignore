@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Build output e installer
+dist/
+out/
+
+# Segreti / file locali
+.env
+.env.*
+*.pem
+*.key
+*.p12
+
+# Log
+*.log
+npm-debug.log*
+
+# Sistema operativo / editor
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/
