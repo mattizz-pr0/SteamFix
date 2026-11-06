@@ -120,5 +120,5 @@ Per problemi, richieste di token, o segnalazioni:
 
 ---
 
-**Versione attuale:** 1.0.0
+**Versione attuale:** 1.0.3
 **Ultimo aggiornamento:** Ottobre 2026
