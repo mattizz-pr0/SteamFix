@@ -1136,7 +1136,7 @@ function moveIndicator(btn) {
                       ✅ Caricato ${dateLabel}
                     </div>
                     <div style="display:flex;gap:6px;">
-                      <button class="btn small dl-update-btn" data-id="${escapeHtml(g.game_id)}" type="button" title="Riscarica da HubcapDB">🔄 Riscarica</button>
+                      <button class="btn small dl-update-btn" data-id="${escapeHtml(g.game_id)}" data-mode="update" type="button" title="Riscarica da HubcapDB">🔄 Riscarica</button>
                       <button class="btn small dl-install-btn" data-id="${escapeHtml(g.game_id)}" type="button">📥 Installa</button>
                       <button class="btn small ghost dl-save-btn" data-id="${escapeHtml(g.game_id)}" type="button">💾 .zip</button>
                     </div>
@@ -1149,7 +1149,7 @@ function moveIndicator(btn) {
                       🆕 Non ancora nel database
                     </div>
                     <div style="display:flex;gap:6px;">
-                      <button class="btn small dl-update-btn" data-id="${escapeHtml(g.game_id)}" type="button" title="Aggiungi al database">⬆ Aggiorna</button>
+                      <button class="btn small dl-update-btn" data-id="${escapeHtml(g.game_id)}" data-mode="add" type="button" title="Aggiungi al database">⬆ Aggiungi</button>
                     </div>
                   </div>
                 `;
@@ -1164,15 +1164,18 @@ function moveIndicator(btn) {
     container.querySelectorAll(".dl-update-btn").forEach(b => {
       b.addEventListener("click", async () => {
         const id = b.dataset.id;
+        const isAdd = b.dataset.mode === "add";
 
         const ok = await showConfirm({
-          title: "Aggiornare questo gioco?",
+          title: isAdd ? "Aggiungere questo gioco?" : "Aggiornare questo gioco?",
           message:
             "Questa operazione scaricherà da HubcapDB i file manifest e lua più recenti, " +
-            "e li caricherà nel database GitHub.\n\n" +
+            (isAdd
+              ? "e li aggiungerà al database GitHub.\n\n"
+              : "e li caricherà nel database GitHub.\n\n") +
             "⚠ Consuma 2 richieste della tua quota giornaliera HubcapDB.\n\n" +
             "Continuare?",
-          confirmText: "⬆ Aggiorna",
+          confirmText: isAdd ? "⬆ Aggiungi" : "⬆ Aggiorna",
           cancelText: "Annulla"
         });
         if (!ok) return;
@@ -1190,7 +1193,7 @@ function moveIndicator(btn) {
           if (r.action === "created" || r.action === "updated" || r.action === "noop") {
             // dopo l'aggiornamento, chiedi se installare anche in SteamTools
             const installNow = await showConfirm({
-              title: "Aggiornamento completato",
+              title: isAdd ? "Aggiunta completata" : "Aggiornamento completato",
               message:
                 `Vuoi anche installare i file aggiornati direttamente in SteamTools?\n\n` +
                 `(Verrà chiesto il permesso di amministratore)`,
@@ -1223,7 +1226,7 @@ function moveIndicator(btn) {
           toast(e.message);
         } finally {
           b.disabled = false;
-          b.textContent = "⬆ Aggiorna";
+          b.textContent = isAdd ? "⬆ Aggiungi" : "🔄 Riscarica";
 
           // dopo l'aggiornamento, ricarica la ricerca per aggiornare la card
           const input = document.getElementById("dl-q");
